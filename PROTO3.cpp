@@ -12,7 +12,7 @@
  * PIXELS
  ********************************************/
 
-Adafruit_NeoPixel pixels = Adafruit_NeoPixel(PIXEL_NUM, PIN_PIXELS, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel pix = Adafruit_NeoPixel(PIXEL_NUM, PIN_PIXELS, NEO_GRB + NEO_KHZ800);
 
 void Pixels::enable(){
   pinMode(PIN_PIXELS, OUTPUT);
@@ -25,8 +25,8 @@ void Pixels::set(byte p, byte r, byte g, byte b){
   g = constrain(g, 0, 255);
   b = constrain(b, 0, 255);
 
-  pixels.setPixelColor(p, pixels.Color(r, g, b));
-  pixels.show();
+  pix.setPixelColor(p, pixels.Color(r, g, b));
+  pix.show();
 }
 
 void Pixels::left_most(byte r, byte g, byte b){
