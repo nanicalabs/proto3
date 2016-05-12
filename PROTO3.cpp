@@ -25,7 +25,7 @@ void Pixels::set(byte p, byte r, byte g, byte b){
   g = constrain(g, 0, 255);
   b = constrain(b, 0, 255);
 
-  pix.setPixelColor(p, pixels.Color(r, g, b));
+  pix.setPixelColor(p, pix.Color(r, g, b));
   pix.show();
 }
 
@@ -49,7 +49,7 @@ void Pixels::color(byte p, byte c){
 
   c = constrain(c, 0, MAX_COLOR_NUM);
 
-  byte h = 100;
+  byte h = 75;
   byte m = 150;
   byte red[] =   {m, m, m, 0, 0, m, m, 0, m, h, h, 0, 0, 0};
   byte green[] = {0, h, m, m, m, 0, 0, m, m, m, 0, h, m, 0};
