@@ -57,3 +57,24 @@ void Pixels::color(byte p, byte c){
   
   set(p, red[c], green[c], blue[c]);  
 }
+
+/********************************************
+ * PIEZO
+ ********************************************/
+
+void Piezo::enable(){
+  pinMode(PIN_PIEZO, OUTPUT);
+}
+
+void Piezo::play_tone(unsigned int frequency, unsigned int duration){
+  unsigned int period = 1000000 / frequency;
+  unsigned int time_high = period / 2;
+
+  for (long i = 0; i < duration * 1000L; i += period) {
+    digitalWrite(PIN_PIEZO, HIGH);
+    delayMicroseconds(time_high);
+    digitalWrite(PIN_PIEZO, LOW);
+    delayMicroseconds(time_high);
+  }  
+}
+
