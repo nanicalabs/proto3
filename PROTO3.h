@@ -14,6 +14,9 @@
 
 #define PIN_PIXELS 5
 #define PIN_PIEZO 13
+#define PIN_TRIG 6
+#define PIN_ECHO 7
+
 const int PIN_LINE_LEFT = A8;
 const int PIN_LINE_RIGHT = A9;
 const int PIN_LIGHT_LEFT = A1;
@@ -181,4 +184,17 @@ class AnalogReadings{
     int value(int p);
     int left();
     int right();
+};
+
+/********************************************
+ * PING (distance) 
+ ********************************************/
+
+class Ping{
+  
+  public:
+    void enable();
+    long duration();
+    long inches();
+    long centimeters();
 };

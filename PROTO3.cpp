@@ -1,5 +1,3 @@
-
-
 /*******************************************************************
  * 
  * Written by Mithi Sevilla | MAY 12, 2016 | http://mithi.xyz
@@ -99,4 +97,41 @@ int AnalogReadings::left(){
 
 int AnalogReadings::right(){
   return value(right_pin);
+}
+
+/********************************************
+ * PING (distance)
+ ********************************************/
+
+void Ping::enable(){
+  pinMode(PIN_TRIG, OUTPUT);
+  pinMode(PIN_ECHO, INPUT);
+}
+
+long Ping::duration(){
+
+  long microseconds;
+
+  digitalWrite(PIN_TRIG, LOW);
+  delayMicroseconds(2);
+  digitalWrite(PIN_TRIG, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(PIN_TRIG, LOW);
+
+  pinMode(PIN_ECHO, INPUT);
+  microseconds = pulseIn(PIN_ECHO, HIGH);
+
+  return microseconds;
+}
+
+long Ping::inches(){
+
+  long microseconds = duration();
+  return microseconds / 74 / 2;
+}
+
+long Ping::centimeters(){
+  
+  long microseconds = duration();
+  return microseconds / 29 / 2;
 }
