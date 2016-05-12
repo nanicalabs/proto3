@@ -7,6 +7,7 @@
 
 #include "Arduino.h"
 #include "Adafruit_NeoPixel.h"
+#include <Adafruit_TiCoServo.h>
 
 /********************************************
  * PIN CONSTANTS
@@ -17,10 +18,23 @@
 #define PIN_TRIG 6
 #define PIN_ECHO 7
 
+#define PIN_LEFT_MOTOR 11
+#define PIN_RIGHT_MOTOR 10
+
 const int PIN_LINE_LEFT = A8;
 const int PIN_LINE_RIGHT = A9;
 const int PIN_LIGHT_LEFT = A1;
 const int PIN_LIGHT_RIGHT = A0;
+
+/********************************************
+ * MOTOR CONSTANTS
+ ********************************************/
+
+const unsigned int LEFT_MAX_FORWARD_SPEED = 180;
+const unsigned int RIGHT_MAX_FORWARD_SPEED = 0;
+const unsigned int LEFT_MAX_REVERSE_SPEED = 0;
+const unsigned int RIGHT_MAX_REVERSE_SPEED = 180;
+const unsigned int STOP_MODE = 90;
 
 /********************************************
  * PIXELS CONSTANTS
@@ -197,4 +211,19 @@ class Ping{
     long duration();
     long inches();
     long centimeters();
+};
+
+/********************************************
+ * MOTORS 
+ ********************************************/
+
+class Motors{
+  public:
+    void move(unsigned int left_speed, unsigned int right_speed);
+    void stop();
+    void enable();
+    void forward();
+    void reverse();
+    void turn_left();
+    void turn_right();
 };

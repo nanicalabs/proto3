@@ -6,11 +6,13 @@
 
 #include "PROTO3.h"
 
+Adafruit_NeoPixel pix = Adafruit_NeoPixel(PIXEL_NUM, PIN_PIXELS, NEO_GRB + NEO_KHZ800);
+Adafruit_TiCoServo left_motor;
+Adafruit_TiCoServo right_motor;
+
 /********************************************
  * PIXELS
  ********************************************/
-
-Adafruit_NeoPixel pix = Adafruit_NeoPixel(PIXEL_NUM, PIN_PIXELS, NEO_GRB + NEO_KHZ800);
 
 void Pixels::enable(){
   pinMode(PIN_PIXELS, OUTPUT);
@@ -134,4 +136,42 @@ long Ping::centimeters(){
   
   long microseconds = duration();
   return microseconds / 29 / 2;
+}
+
+/********************************************
+ * MOTORS
+ ********************************************/
+
+void Motors::enable(){
+  left_motor.attach(PIN_LEFT_MOTOR);
+  right_motor.attach(PIN_RIGHT_MOTOR);
+}
+
+void Motors::move(unsigned int left_speed, unsigned int right_speed){
+  
+  left_speed = constrain(left_speed, 0, 181);
+  right_speed = constrain(right_speed, 0, 181);
+  
+  left_motor.write(left_speed);
+  right_motor.write(right_speed);
+}
+
+void Motors::stop(){
+  move(STOP_MODE, STOP_MODE);
+}
+
+void Motors::forward(){
+  move(LEFT_MAX_FORWARD_SPEED, RIGHT_MAX_FORWARD_SPEED);
+}
+
+void Motors::reverse(){
+  move(LEFT_MAX_REVERSE_SPEED, RIGHT_MAX_REVERSE_SPEED);
+}
+
+void Motors::turn_left(){
+  move(LEFT_MAX_REVERSE_SPEED, RIGHT_MAX_FORWARD_SPEED);
+}
+
+void Motors::turn_right(){
+  move(LEFT_MAX_FORWARD_SPEED, RIGHT_MAX_REVERSE_SPEED);
 }
