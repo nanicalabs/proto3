@@ -78,3 +78,25 @@ void Piezo::play_tone(unsigned int frequency, unsigned int duration){
   }  
 }
 
+/********************************************
+ * ANALOG READINGS
+ ********************************************/
+
+void AnalogReadings::enable(int l, int r){
+  left_pin = l; 
+  right_pin = r;
+  pinMode(left_pin, INPUT);
+  pinMode(right_pin, INPUT);
+}
+
+int AnalogReadings::value(int p){
+  return analogRead(p);
+}
+
+int AnalogReadings::left(){
+  return value(left_pin);
+}
+
+int AnalogReadings::right(){
+  return value(right_pin);
+}

@@ -14,6 +14,10 @@
 
 #define PIN_PIXELS 5
 #define PIN_PIEZO 13
+const int PIN_LINE_LEFT = A8;
+const int PIN_LINE_RIGHT = A9;
+const int PIN_LIGHT_LEFT = A1;
+const int PIN_LIGHT_RIGHT = A0;
 
 /********************************************
  * PIXELS CONSTANTS
@@ -138,7 +142,7 @@ const byte MAX_COLOR_NUM = 13;
 #define NOTE_D8  4699
 #define NOTE_DS8 4978
 #define NO_TONE 0
- 
+
 /********************************************
  * PIXELS
  ********************************************/
@@ -162,4 +166,19 @@ class Piezo{
   public: 
     void enable();
     void play_tone(unsigned int frequency, unsigned int duration);
+};
+
+/********************************************
+ * ANALOG READINGS 
+ ********************************************/
+
+class AnalogReadings{
+  int left_pin;
+  int right_pin;
+   
+  public: 
+    void enable(int l, int r);
+    int value(int p);
+    int left();
+    int right();
 };
